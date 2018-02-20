@@ -1,0 +1,5 @@
+binary_sensor.detecteur_couloir_sensor:
+  friendly_name: detecteur_couloir
+  icon: mdi:run
+device_tracker.08028ea69064:
+  hidden: true

@@ -1,0 +1,5 @@
+# Weather prediction
+- platform: yr
+- platform: time_date
+  display_options:
+    - 'time'

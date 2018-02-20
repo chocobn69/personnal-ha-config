@@ -1,0 +1,9 @@
+- platform: owntracks
+- platform: nmap_tracker
+  hosts: 192.168.1.0/24
+  home_interval: 5
+  interval_seconds: 120
+  consider_home: 30
+  track_new_devices: yes
+  exclude:
+    - 192.168.1.19

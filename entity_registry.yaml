@@ -1,0 +1,111 @@
+binary_sensor.detecteur_couloir_sensor:
+  platform: zwave
+  unique_id: 2-72057594076463104
+sensor.detecteur_couloir_temperature:
+  platform: zwave
+  unique_id: 2-72057594076479506
+sensor.detecteur_couloir_luminance:
+  platform: zwave
+  unique_id: 2-72057594076479538
+sensor.detecteur_couloir_seismic_intensity:
+  platform: zwave
+  unique_id: 2-72057594076479890
+sensor.detecteur_couloir_alarm_type:
+  platform: zwave
+  unique_id: 2-72057594077528065
+sensor.detecteur_couloir_alarm_level:
+  platform: zwave
+  unique_id: 2-72057594077528081
+sensor.detecteur_couloir_sourcenodeid:
+  platform: zwave
+  unique_id: 2-72057594077528097
+sensor.detecteur_couloir_burglar:
+  platform: zwave
+  unique_id: 2-72057594077528225
+sensor.detecteur_couloir_general:
+  platform: zwave
+  unique_id: 2-72057594078232577
+light.lumieres_couloir_level:
+  platform: zwave
+  unique_id: 4-72057594109853697
+light.lumieres_couloir_level_2:
+  platform: zwave
+  unique_id: 4-144115188147781633
+sensor.lumieres_couloir_power:
+  platform: zwave
+  unique_id: 4-72057594110033986
+sensor.lumieres_couloir_energy:
+  platform: zwave
+  unique_id: 4-72057594110050306
+sensor.lumieres_couloir_unknown:
+  platform: zwave
+  unique_id: 4-144115188147978242
+sensor.lumieres_couloir_power_2:
+  platform: zwave
+  unique_id: 4-72057594110050434
+sensor.lumieres_couloir_exporting:
+  platform: zwave
+  unique_id: 4-72057594110050816
+sensor.lumieres_couloir_alarm_type:
+  platform: zwave
+  unique_id: 4-72057594111082497
+sensor.lumieres_couloir_alarm_level:
+  platform: zwave
+  unique_id: 4-72057594111082513
+sensor.lumieres_couloir_alarm_type_2:
+  platform: zwave
+  unique_id: 4-144115188149010433
+sensor.lumieres_couloir_alarm_level_2:
+  platform: zwave
+  unique_id: 4-144115188149010449
+sensor.lumieres_couloir_sourcenodeid:
+  platform: zwave
+  unique_id: 4-72057594111082529
+sensor.lumieres_couloir_heat:
+  platform: zwave
+  unique_id: 4-72057594111082609
+sensor.lumieres_couloir_power_management:
+  platform: zwave
+  unique_id: 4-72057594111082673
+sensor.lumieres_couloir_system:
+  platform: zwave
+  unique_id: 4-72057594111082689
+sensor.alarm_type:
+  platform: zwave
+  unique_id: 5-72057594127859713
+sensor.alarm_level:
+  platform: zwave
+  unique_id: 5-72057594127859729
+binary_sensor.fibaro_system_fgsd002_smoke_sensor_sensor:
+  platform: zwave
+  unique_id: 5-72057594126794752
+sensor.fibaro_system_fgsd002_smoke_sensor_temperature:
+  platform: zwave
+  unique_id: 5-72057594126811154
+sensor.fibaro_system_fgsd002_smoke_sensor_sourcenodeid:
+  platform: zwave
+  unique_id: 5-72057594127859745
+sensor.fibaro_system_fgsd002_smoke_sensor_smoke:
+  platform: zwave
+  unique_id: 5-72057594127859777
+sensor.fibaro_system_fgsd002_smoke_sensor_heat:
+  platform: zwave
+  unique_id: 5-72057594127859825
+sensor.fibaro_system_fgsd002_smoke_sensor_burglar:
+  platform: zwave
+  unique_id: 5-72057594127859873
+sensor.fibaro_system_fgsd002_smoke_sensor_power_management:
+  platform: zwave
+  unique_id: 5-72057594127859889
+sensor.fibaro_system_fgsd002_smoke_sensor_system:
+  platform: zwave
+  unique_id: 5-72057594127859905
+sensor.fibaro_system_fgsd002_smoke_sensor_general:
+  platform: zwave
+  unique_id: 5-72057594128564225
+sensor.fibaro_system_fgsd002_smoke_sensor_smoke_2:
+  platform: zwave
+  unique_id: 5-72057594128564241
+sensor.fibaro_system_fgsd002_smoke_sensor_heat_2:
+  platform: zwave
+  unique_id: 5-72057594128564289
