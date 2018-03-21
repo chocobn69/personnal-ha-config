@@ -7,12 +7,14 @@
   condition:
     condition: or
     conditions:
+      # At least one of the following is required.
       - condition: time
-        # At least one of the following is required.
         after: '06:10:00'
+        before: '09:00:00'
+      - condition: time
+        after: '17:00:00'
         before: '20:15:00'
       - condition: time
-        # At least one of the following is required.
         after: '21:00:00'
         before: '05:10:00'
   action:
@@ -22,9 +24,9 @@
       data_template:
         brightness: >
           {% if now().strftime('%H')| int >= 19 %}
-          6
+          8
           {% elif now().strftime('%H')| int <= 8 %}
-          6
+          8
           {% else %}
           255
           {% endif %}

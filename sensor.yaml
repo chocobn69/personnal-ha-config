@@ -3,3 +3,13 @@
 - platform: time_date
   display_options:
     - 'time'
+- platform: broadlink
+  update_interval: 60
+  host: 192.168.1.16
+  mac: '34:EA:34:B2:C1:04'
+  monitored_conditions:
+    - temperature
+    - humidity
+    - air_quality
+    - light
+    - noise

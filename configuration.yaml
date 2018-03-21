@@ -2,10 +2,10 @@ homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: !secret latitude
-  longitude: !secret longitude
+  latitude: !secret secret_latitude
+  longitude: !secret secret_longitude
   # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: !secret elevation
+  elevation: !secret secret_elevation
   # metric for Metric, imperial for Imperial
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -15,9 +15,7 @@ homeassistant:
 
 # logging
 logger:
-  default: debug
-  logs:
-    homeassistant.components.mqtt: info
+  default: warn
 
 recorder:
   purge_interval: 2
@@ -25,19 +23,16 @@ recorder:
   include:
     entities:
       - sensor.detecteur_couloir_temperature
-      - sensor.smoke_sensor_salon_temperature
-        #  exclude:
-        #    domains:
-        #      - automation
-        #      - weblink
-        #      - updater
-        #    entities:
-        #      - sun.sun # Don't record sun data
-        #      - sensor.last_boot # Comes from 'systemmonitor' sensor platform
-        #      - sensor.date
+      - sensor.fibaro_system_fgsd002_smoke_sensor_temperature
+      - sensor.broadlink_sensor_air_quality
+      - sensor.broadlink_sensor_humidity
+      - sensor.broadlink_sensor_light
+      - sensor.broadlink_sensor_noise
+      - sensor.broadlink_sensor_temperature
 
 # Enables the frontend
 frontend:
+  javascript_version: latest
 
 # Enables configuration UI
 config:
@@ -47,13 +42,10 @@ http:
   api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: !secret http_home
-  ssl_certificate: !secret ssl_certificate
-  ssl_key: !secret ssl_key
+  ssl_certificate: !secret secret_ssl_certificate
+  ssl_key: !secret secret_ssl_key
   ip_ban_enabled: True
   login_attempts_threshold: 3
-
-frontend:
-  javascript_version: latest
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -74,10 +66,10 @@ discovery:
 history:
 
 # View all events in a logbook
-logbook:
+#logbook:
 
 # Enables a map showing the location of tracked devices
-map:
+#map:
 
 # Track the sun
 sun:
@@ -108,20 +100,20 @@ notify:
 # zwave
 zwave:
   usb_path: /dev/ttyACM0
-  network_key: !secret network_key
+  network_key: !secret secret_network_key
 
 # history
 history_graph:
   gr1:
-    name: Temperatures (weekly)
+    name: Temp Salon (weekly)
     entities:
-      - sensor.detecteur_couloir_temperature
+      - sensor.fibaro_system_fgsd002_smoke_sensor_temperature
     hours_to_show: 168
     refresh: 60
   gr2:
-    name: Temperatures (daily)
+    name: Temp Salon (daily)
     entities:
-      - sensor.detecteur_couloir_temperature
+      - sensor.fibaro_system_fgsd002_smoke_sensor_temperature
     hours_to_show: 24
     refresh: 60
 
