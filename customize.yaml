@@ -3,3 +3,5 @@ binary_sensor.detecteur_couloir_sensor:
   icon: mdi:run
 device_tracker.08028ea69064:
   hidden: true
+media_player.mibox3:
+  hidden: true

@@ -6,4 +6,4 @@
   consider_home: 30
   track_new_devices: yes
   exclude:
-    - 192.168.1.19
+    - 192.168.1.24

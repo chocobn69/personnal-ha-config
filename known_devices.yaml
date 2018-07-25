@@ -115,3 +115,76 @@ fc15b4e0ca1d:
   picture:
   track: true
   vendor: HangZhou Gubei Electronics Technology Co.,Ltd
+
+f0bf97313d6c:
+  hide_if_away: false
+  icon:
+  mac: F0:BF:97:31:3D:6C
+  name: f0bf97313d6c
+  picture:
+  track: true
+  vendor: Sony Corporation
+
+3cbd3e701c41:
+  hide_if_away: false
+  icon:
+  mac: 3C:BD:3E:70:1C:41
+  name: 3cbd3e701c41
+  picture:
+  track: true
+
+0009b0095269:
+  hide_if_away: false
+  icon:
+  mac: 00:09:B0:09:52:69
+  name: 0009b0095269
+  picture:
+  track: true
+
+2cfda122d20b:
+  hide_if_away: false
+  icon:
+  mac: 2C:FD:A1:22:D2:0B
+  name: 2cfda122d20b
+  picture:
+  track: true
+
+70ee502efa4a:
+  hide_if_away: false
+  icon:
+  mac: 70:EE:50:2E:FA:4A
+  name: 70ee502efa4a
+  picture:
+  track: true
+
+b827eb4eb5b3:
+  hide_if_away: false
+  icon:
+  mac: B8:27:EB:4E:B5:B3
+  name: b827eb4eb5b3
+  picture:
+  track: true
+
+80a5898bd21f:
+  hide_if_away: false
+  icon:
+  mac: 80:A5:89:8B:D2:1F
+  name: 80a5898bd21f
+  picture:
+  track: true
+
+74d02b2b5202:
+  hide_if_away: false
+  icon:
+  mac: 74:D0:2B:2B:52:02
+  name: 74d02b2b5202
+  picture:
+  track: true
+
+0009b0e6e0eb:
+  hide_if_away: false
+  icon:
+  mac: 00:09:B0:E6:E0:EB
+  name: 0009b0e6e0eb
+  picture:
+  track: true

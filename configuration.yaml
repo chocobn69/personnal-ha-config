@@ -15,20 +15,12 @@ homeassistant:
 
 # logging
 logger:
-  default: warn
+  default: error
 
 recorder:
+  db_url: postgresql://hass:@localhost/hass
   purge_interval: 2
-  purge_keep_days: 14
-  include:
-    entities:
-      - sensor.detecteur_couloir_temperature
-      - sensor.fibaro_system_fgsd002_smoke_sensor_temperature
-      - sensor.broadlink_sensor_air_quality
-      - sensor.broadlink_sensor_humidity
-      - sensor.broadlink_sensor_light
-      - sensor.broadlink_sensor_noise
-      - sensor.broadlink_sensor_temperature
+  purge_keep_days: 365
 
 # Enables the frontend
 frontend:
@@ -66,20 +58,20 @@ discovery:
 history:
 
 # View all events in a logbook
-#logbook:
+logbook:
 
 # Enables a map showing the location of tracked devices
-#map:
+map:
 
 # Track the sun
 sun:
 
 # Text to speech
-# tts:
-#   - platform: google
+tts:
+   - platform: google
 
 # Cloud
-# cloud:
+cloud:
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -120,8 +112,18 @@ history_graph:
 alarm_control_panel:
   - platform: manual
 
+# apc ups battery backup
+apcupsd:
+
+netatmo:
+  api_key: !secret secret_netatmo_api_key
+  secret_key: !secret secret_netatmo_secret_key
+  username: !secret secret_netatmo_username
+  password: !secret secret_netatmo_password
+
 # include
 sensor: !include sensor.yaml
+binary_sensor: !include binary_sensor.yaml
 
 device_tracker: !include device_tracker.yaml
 
