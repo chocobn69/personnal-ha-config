@@ -15,7 +15,7 @@ homeassistant:
 
 # logging
 logger:
-  default: error
+  default: info
 
 recorder:
   db_url: postgresql://hass:@localhost/hass
@@ -130,3 +130,4 @@ device_tracker: !include device_tracker.yaml
 # media_player: !include media_player.yaml
 
 light: !include light.yaml
+cover: !include covers.yaml
