@@ -17,7 +17,7 @@ This project is my personnal home installation, based on [hass](https://www.home
     - [ ] childs covers
     - [ ] rooms
 - [ ] Control lights
-    - [ ] corridor
+    - [x] corridor
     - [ ] living room
     - [ ] opening doors light
     - [ ] terrace lights
@@ -38,13 +38,16 @@ This project is my personnal home installation, based on [hass](https://www.home
     - [x] outside humidity / temp / ...
     - [x] inside noise / temp / humidity / ...
     - [ ] forecast
-- [ ] door opening sensors (zwave based_)
+- [ ] door opening sensors (zwave based)
     - [ ] main door
     - [ ] laundry door
     - [ ] workshop door
-- [ ] rain's water tank level sensor (???_)
+- [ ] rain's water tank level sensor (???)
 - [ ] outside camera (netatmo?)
+- [ ] living room camera (netatmo?)
 - [ ] electric stats from linky
+- [ ] mailbox sensor (diy)
+- [ ] Pollen sensor (webservice) to detect allergens
 
 ### Triggers
 - [x] control corridor light clock based
@@ -55,6 +58,7 @@ This project is my personnal home installation, based on [hass](https://www.home
 - [ ] wake up mode (??)
     - [ ] standard
     - [ ] week-end
+- [ ] action controlled by calendar
 
 ### Misc.
 - [x] voice synthesis (google tts)
@@ -63,3 +67,5 @@ This project is my personnal home installation, based on [hass](https://www.home
 - [ ] network stats from router
 - [ ] lovelace ui
     - [ ] floor plan
+- [ ] torrent sensor (???)
+- [ ] shopping list
