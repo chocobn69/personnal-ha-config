@@ -125,10 +125,7 @@ netatmo:
 # include
 sensor: !include sensor.yaml
 binary_sensor: !include binary_sensor.yaml
-
 device_tracker: !include device_tracker.yaml
-
-# media_player: !include media_player.yaml
-
+media_player: !include media_player.yaml
 light: !include light.yaml
 cover: !include covers.yaml
