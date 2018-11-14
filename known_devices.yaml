@@ -188,3 +188,11 @@ b827eb4eb5b3:
   name: 0009b0e6e0eb
   picture:
   track: true
+
+000ec6b24ba3:
+  hide_if_away: false
+  icon:
+  mac: 00:0E:C6:B2:4B:A3
+  name: 000ec6b24ba3
+  picture:
+  track: true
