@@ -1,4 +1,4 @@
-title: My Awesome Home
+title: My Awesome Home test
 views:
     # View tab title.
   - title: Example
@@ -10,3 +10,4 @@ views:
         title: Lovelace
         content: >
           Welcome to your **Lovelace UI**.
+          _test_

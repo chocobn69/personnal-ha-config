@@ -71,6 +71,10 @@ tts:
    - platform: google
      language: 'fr'
 
+cast:
+  media_player:
+  - host: 192.168.1.6
+
 # Cloud
 cloud:
 

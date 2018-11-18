@@ -5,3 +5,15 @@ device_tracker.08028ea69064:
   hidden: true
 media_player.mibox3:
   hidden: true
+cover.living:
+  assumed_state: true
+cover.chambres:
+  assumed_state: true
+cover.enfants:
+  assumed_state: true
+cover.est:
+  assumed_state: true
+cover.ouest:
+  assumed_state: true
+cover.tout:
+  assumed_state: true

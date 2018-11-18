@@ -3,19 +3,24 @@
 This project is my personnal home installation, based on [hass](https://www.home-assistant.io/) project.
 
 ## CHANGELOG
+
+### 2018-11-18
+- Add cover group
+
 ### 2018-22-06
 - Add README
+
 
 ## TODO
 ### Actions
 - [x] Open/close/stop all covers individualy
 - [ ] Half opening all covers individualy
-- [ ] Control group of covers
-    - [ ] living room
-    - [ ] east covers
-    - [ ] west covers
-    - [ ] childs covers
-    - [ ] rooms
+- [x] Control group of covers
+    - [x] living room
+    - [x] east covers
+    - [x] west covers
+    - [x] childs covers
+    - [x] rooms
 - [ ] Control lights
     - [x] corridor
     - [ ] living room
@@ -64,7 +69,7 @@ This project is my personnal home installation, based on [hass](https://www.home
 - [x] voice synthesis (google tts)
     - [ ] change to owned solution
 - [ ] Voice interaction (???)
-- [ ] network stats from router
+- [x] network stats from router
 - [ ] lovelace ui
     - [ ] floor plan
 - [ ] torrent sensor (???)
