@@ -31,13 +31,13 @@ config:
 
 http:
   # Secrets are defined in the file secrets.yaml
-  api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: !secret http_home
   ssl_certificate: !secret secret_ssl_certificate
   ssl_key: !secret secret_ssl_key
   ip_ban_enabled: True
   login_attempts_threshold: 3
+  trusted_networks: !secret trusted_networks
 
 # Checks for available updates
 # Note: This component will send some information about your system to

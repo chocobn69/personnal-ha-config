@@ -6,14 +6,20 @@ device_tracker.08028ea69064:
 media_player.mibox3:
   hidden: true
 cover.living:
+  device_class: window
   assumed_state: true
 cover.chambres:
+  device_class: window
   assumed_state: true
 cover.enfants:
+  device_class: window
   assumed_state: true
 cover.est:
+  device_class: window
   assumed_state: true
 cover.ouest:
+  device_class: window
   assumed_state: true
 cover.tout:
+  device_class: window
   assumed_state: true
