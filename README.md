@@ -48,8 +48,7 @@ This project is my personnal home installation, based on [hass](https://www.home
     - [ ] laundry door
     - [ ] workshop door
 - [ ] rain's water tank level sensor (???)
-- [ ] outside camera (netatmo?)
-- [ ] living room camera (netatmo?)
+- [x] outside camera (netatmo)
 - [ ] electric stats from linky
 - [ ] mailbox sensor (diy)
 - [ ] Pollen sensor (webservice) to detect allergens
