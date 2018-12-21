@@ -4,7 +4,9 @@ binary_sensor.detecteur_couloir_sensor:
 device_tracker.08028ea69064:
   hidden: true
 media_player.mibox3:
-  hidden: true
+  hidden: false
+media_player.plex:
+  hidden: false
 cover.living:
   device_class: window
   assumed_state: true

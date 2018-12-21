@@ -50,6 +50,8 @@ updater:
 
 # Discover some devices automatically
 discovery:
+  ignore:
+     - netgear_router
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 # conversation:
@@ -129,7 +131,7 @@ netatmo:
 # include
 sensor: !include sensor.yaml
 binary_sensor: !include binary_sensor.yaml
-device_tracker: !include device_tracker.yaml
+#device_tracker: !include device_tracker.yaml
 media_player: !include media_player.yaml
 light: !include light.yaml
 cover: !include covers.yaml

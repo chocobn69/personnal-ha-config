@@ -196,3 +196,11 @@ b827eb4eb5b3:
   name: 000ec6b24ba3
   picture:
   track: true
+
+70ee50363672:
+  hide_if_away: false
+  icon:
+  mac: 70:EE:50:36:36:72
+  name: 70ee50363672
+  picture:
+  track: true
