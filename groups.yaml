@@ -1,25 +1,7 @@
-# lumieres:
-#   name: Lumieres
-#   view: no
-#   icon: mdi:lightbulb-outline
-#   entities:
-#     - light.lumieres_couloir_level
-#     - light.chambre_nicolas
-# detecteurs:
-#   name: detecteurs
-#   view: no
-#   icon: mdi:home-automation
-#   entities:
-#     - binary_sensor.detecteur_couloir_sensor
-# salon:
-#   name: "pieces de vie"
-#   view: yes
-#   icon: mdi:weather-sunny
-# nuit:
-#   name: "pieces de nuit"
-#   view: yes
-#   icon: mdi:weather-night
-#   entities:
-#     - light.lumieres_couloir_level
-#     - light.chambre_nicolas
-#     - binary_sensor.detecteur_couloir_sensor
+escalier:
+  name: Couloir chambres
+  view: no
+  icon: mdi:lightbulb-outline
+  entities:
+    - light.lumieres_couloir_level
+    - input_number.timer_couloir

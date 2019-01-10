@@ -1,0 +1,10 @@
+#**********************************************************
+#* Timer couloir chambres (minutes)
+#**********************************************************
+  timer_couloir:
+    name: Timer couloir chambres
+    icon: mdi:timer
+    initial: 2
+    min: 1
+    max: 10
+    step: 1
