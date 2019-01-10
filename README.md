@@ -45,7 +45,7 @@ This project is my personnal home installation, based on [hass](https://www.home
     - [ ] forecast
 - [ ] door opening sensors (zwave based)
     - [ ] main door
-    - [ ] laundry door
+    - [x] laundry door
     - [ ] workshop door
 - [ ] rain's water tank level sensor (???)
 - [x] outside camera (netatmo)
