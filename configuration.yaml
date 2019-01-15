@@ -85,11 +85,11 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 
 # mqtt broker
-mqtt:
-  discovery: true
-  broker: localhost
-  username: admin
-  password: !secret mosquitto_password
+# mqtt:
+#   discovery: true
+#   broker: localhost
+#   username: admin
+#   password: !secret mosquitto_password
 
 # notify
 notify:
