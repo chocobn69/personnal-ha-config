@@ -1,11 +1,11 @@
 #**********************************************************
 #* Timer couloir chambres (minutes)
 #**********************************************************
-  timer_couloir:
-    name: Timer couloir chambres
-    icon: mdi:timer
-    initial: 1
-    min: 1
-    max: 60
-    step: 1
-    unit_of_measurement: minutes
+#timer_couloir:
+#  name: Timer couloir chambres
+#  icon: mdi:timer
+#  initial: 15
+#  min: 1
+#  max: 60
+#  step: 1
+#  unit_of_measurement: minutes

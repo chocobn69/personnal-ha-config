@@ -1,0 +1,7 @@
+- platform: rest
+  name: mattermost
+  resource: !secret secret_mattermost_maison
+  method: POST_JSON 
+  message_param_name: text
+  data:
+    username: homeassistant

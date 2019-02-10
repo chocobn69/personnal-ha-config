@@ -15,7 +15,7 @@ homeassistant:
 
 # logging
 logger:
-  default: info
+  default: warning
 
 recorder:
   db_url: postgresql://hass:@localhost/hass
@@ -35,7 +35,8 @@ http:
   base_url: !secret http_home
   ssl_certificate: !secret secret_ssl_certificate
   ssl_key: !secret secret_ssl_key
-  ip_ban_enabled: True
+  #ip_ban_enabled: True
+  ip_ban_enabled: False
   login_attempts_threshold: 3
   trusted_networks: !secret trusted_networks
 
@@ -92,9 +93,7 @@ script: !include scripts.yaml
 #   password: !secret mosquitto_password
 
 # notify
-notify:
-  - name: syslog
-    platform: syslog
+notify: !include notify.yaml
 
 # zwave
 zwave:

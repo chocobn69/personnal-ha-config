@@ -32,6 +32,7 @@
       command_open: curl -X POST http://192.168.1.17:8080/action/8/up
       command_stop: curl -X POST http://192.168.1.17:8080/action/8/stop
       command_close: curl -X POST http://192.168.1.17:8080/action/8/down
+
 - platform: group
   name: living
   entities:
@@ -69,3 +70,21 @@
   entities:
     - cover.ouest
     - cover.est
+ 
+- platform: template
+  covers:
+    salon_template:
+      friendly_name: "Salon template"
+      open_cover: 
+        service: cover.open_cover
+        data:
+          entity_id: cover.salon
+      stop_cover: 
+        service: cover.stop_cover
+        data:
+          entity_id: cover.salon
+      close_cover: 
+        service: cover.close_cover
+        data:
+          entity_id: cover.salon
+      optimistic: true

@@ -1,7 +1,0 @@
-escalier:
-  name: Couloir chambres
-  view: no
-  icon: mdi:lightbulb-outline
-  entities:
-    - light.lumieres_couloir_level
-    - input_number.timer_couloir
