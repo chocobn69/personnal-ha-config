@@ -5,3 +5,10 @@
   message_param_name: text
   data:
     username: homeassistant
+- platform: rest
+  name: mattermost_tests
+  resource: !secret secret_mattermost_tests
+  method: POST_JSON 
+  message_param_name: text
+  data:
+    username: homeassistant
