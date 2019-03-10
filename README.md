@@ -14,7 +14,7 @@ This project is my personnal home installation, based on [hass](https://www.home
 ## TODO
 ### Actions
 - [x] Open/close/stop all covers individualy
-- [ ] Half opening all covers individualy
+- [x] Half opening all covers individualy
 - [x] Control group of covers
     - [x] living room
     - [x] east covers
@@ -31,7 +31,7 @@ This project is my personnal home installation, based on [hass](https://www.home
 - [ ] gate
 - [x] pioneer amp. control
 - [ ] plex control
-- [ ] alarm arm/disarm
+- [x] alarm arm/disarm
 - [ ] xiaomi vacuum control
 
 ### Sensors
@@ -44,9 +44,9 @@ This project is my personnal home installation, based on [hass](https://www.home
     - [x] inside noise / temp / humidity / ...
     - [ ] forecast
 - [ ] door opening sensors (zwave based)
-    - [ ] main door
+    - [x] main door
     - [x] laundry door
-    - [ ] workshop door
+    - [x] workshop door
 - [ ] rain's water tank level sensor (???)
 - [x] outside camera (netatmo)
 - [ ] electric stats from linky

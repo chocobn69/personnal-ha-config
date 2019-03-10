@@ -59,3 +59,25 @@
     data:
       message: 'ouverture porte buanderie'
       title: 'home assistant event'
+- alias: 'ouverture porte principale'
+  initial_state: 'on'
+  trigger:
+      platform: state
+      entity_id: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_access_control
+      to: '22'
+  action:
+    service: notify.mattermost
+    data:
+      message: 'ouverture porte principale'
+      title: 'home assistant event'
+- alias: 'ouverture porte garage'
+  initial_state: 'on'
+  trigger:
+      platform: state
+      entity_id: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_access_control_2
+      to: '22'
+  action:
+    service: notify.mattermost
+    data:
+      message: 'ouverture porte garage'
+      title: 'home assistant event'

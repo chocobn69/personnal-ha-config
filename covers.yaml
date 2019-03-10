@@ -75,16 +75,10 @@
   covers:
     salon_template:
       friendly_name: "Salon template"
-      open_cover: 
-        service: cover.open_cover
-        data:
+      set_cover_position:
+        service: script.cover_percent
+        data_template:
           entity_id: cover.salon
-      stop_cover: 
-        service: cover.stop_cover
-        data:
-          entity_id: cover.salon
-      close_cover: 
-        service: cover.close_cover
-        data:
-          entity_id: cover.salon
+          position: "{{position}}"
+          total_time: 27
       optimistic: true

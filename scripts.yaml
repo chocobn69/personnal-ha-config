@@ -1,0 +1,15 @@
+cover_percent:
+    sequence:
+        - service: cover.close_cover
+          data_template:
+            entity_id: "{{ entity_id }}"
+        - delay:
+              seconds: "{{ total_time }}"
+        - service: cover.open_cover
+          data_template:
+            entity_id: "{{ entity_id }}"
+        - delay:
+              seconds: "{{ (total_time|int * position|int / 100 ) | int }}"
+        - service: cover.stop_cover
+          data_template:
+            entity_id: "{{ entity_id }}"

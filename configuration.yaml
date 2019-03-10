@@ -128,7 +128,7 @@ netatmo:
   password: !secret secret_netatmo_password
 
 # include
-input_number: !include inputs.yaml
+#input_number: !include inputs.yaml
 sensor: !include sensor.yaml
 binary_sensor: !include binary_sensor.yaml
 #device_tracker: !include device_tracker.yaml
