@@ -12,6 +12,10 @@ homeassistant:
   time_zone: Europe/Paris
   # Customization file
   customize: !include customize.yaml
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks: !secret trusted_networks
 
 # logging
 logger:
@@ -38,7 +42,7 @@ http:
   #ip_ban_enabled: True
   ip_ban_enabled: False
   login_attempts_threshold: 3
-  trusted_networks: !secret trusted_networks
+
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -71,7 +75,7 @@ sun:
 
 # Text to speech
 tts:
-   - platform: google
+   - platform: google_translate
      language: 'fr'
 
 cast:
@@ -117,6 +121,7 @@ history_graph:
 
 alarm_control_panel:
   - platform: manual
+    code: !secret secret_alarm_code
 
 # apc ups battery backup
 apcupsd:
@@ -126,6 +131,27 @@ netatmo:
   secret_key: !secret secret_netatmo_secret_key
   username: !secret secret_netatmo_username
   password: !secret secret_netatmo_password
+  discovery: false
+
+lovelace:
+    mode: yaml
+
+camera:
+  - platform: netatmo
+
+meteo_france:
+  - city: !secret city
+    monitored_conditions:
+      - rain_chance
+      - freeze_chance
+      - thunder_chance
+      - snow_chance
+      - weather
+      - next_rain
+      - wind_speed
+      - temperature
+      - uv
+      - weather_alert
 
 # include
 #input_number: !include inputs.yaml
