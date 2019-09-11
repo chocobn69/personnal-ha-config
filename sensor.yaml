@@ -1,3 +1,4 @@
+- platform: netatmo
 # Weather prediction
 - platform: yr
 - platform: time_date
@@ -15,3 +16,5 @@
     - status
     - timeleft
     - tonbatt
+- platform: season
+  type: astronomical
