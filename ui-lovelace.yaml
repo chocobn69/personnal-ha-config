@@ -1,13 +1,123 @@
-title: My Awesome Home test
+title: Home Assistant
 views:
-    # View tab title.
-  - title: Example
-    panel: true
-    # Makes the first card fill the view
+  - title: Maison
+    panel: false
     cards:
-        # The markdown card will render markdown text.
-      - type: markdown
-        title: Lovelace
-        content: >
-          Welcome to your **Lovelace UI**.
-          _test_
+        - type: entities
+          title: Volets roulant
+          show_header_toggle: false
+          entities:
+            - entity: cover.living
+              name: Salon + Cuisine
+            - entity: cover.chambres
+              name: Chambres
+            - entity: cover.tout
+              name: Tout
+        - type: picture-entity
+          title: Camera
+          entity: camera.garage_exterieur
+          camera_view: live
+        - type: sensor
+          entity: sensor.netatmo_indoor_temperature
+          name: Température Salon
+          graph: line
+        - type: sensor
+          entity: sensor.netatmo_toit_temperature
+          name: Température Toit
+          graph: line
+        - type: alarm-panel
+          entity: alarm_control_panel.ha_alarm
+
+  - title: Meteo
+    panel: false
+    cards:
+        - type: weather-forecast
+          entity: weather.montagnat
+        - type: history-graph
+          title: 'Temperatures sur 24h'
+          hours_to_show: 24
+          refresh_interval: 10
+          entities:
+            - entity: sensor.netatmo_indoor_temperature
+              name: Temperature intérieure
+            - entity: sensor.netatmo_toit_temperature
+              name: Temperature extérieure
+        - type: history-graph
+          title: 'Temperatures sur une semaine'
+          hours_to_show: 168
+          refresh_interval: 10
+          entities:
+            - entity: sensor.netatmo_indoor_temperature
+              name: Temperature intérieure
+            - entity: sensor.netatmo_toit_temperature
+              name: Temperature extérieure
+
+  - title: Volets
+    panel: false
+    cards:
+        - type: entities
+          title: Volets roulant (individuel)
+          show_header_toggle: false
+          entities:
+            - entity: cover.salon
+              name: Salon
+            - entity: cover.cuisine
+              name: Cuisine
+            - entity: cover.parents
+              name: Parents
+            - entity: cover.amis
+              name: Amis
+            - entity: cover.enfant1
+              name: !secret prenom_enfant1
+            - entity: cover.enfant2
+              name: !secret prenom_enfant2
+            - entity: cover.sdb
+              name: Salle de bain enfants
+            - entity: cover.atelier
+              name: Atelier
+        - type: entities
+          title: Volets roulant (groupes)
+          show_header_toggle: false
+          entities:
+            - entity: cover.living
+              name: Salon + Cuisine
+            - entity: cover.enfants
+              name: Enfants
+            - entity: cover.chambres
+              name: Chambres
+            - entity: cover.est
+              name: Volets Est
+            - entity: cover.ouest
+              name: Volets Ouest
+            - entity: cover.tout
+              name: Tous les volets
+  - title: Lumieres
+    panel: false
+    cards:
+        - type: entities
+          title: Lumieres 
+          show_header_toggle: false
+          entities:
+            - type: light
+              entity: light.lumieres_couloir_level_2
+              name: Lumières couloir
+  - title: Automatisations
+    panel: false
+    cards:
+        - type: entities
+          title: Lumieres 
+          show_header_toggle: false
+          entities:
+            - entity: automation.lumieres_couloir_auto_on
+            - entity: automation.extinction_lumieres_couloir_si_pas_de_mouvement
+        - type: entities
+          title: Simulation de presence 
+          show_header_toggle: false
+          entities:
+            - entity: automation.simulation_de_presence_lumieres_couloir
+            - entity: automation.simulation_de_presence_ete_ouverture_volets_est
+            - entity: automation.simulation_de_presence_sauf_ete_ouverture_volets_est
+            - entity: automation.simulation_de_presence_ete_fermeture_volets_est
+            - entity: automation.simulation_de_presence_ouverture_volets_ouest
+            - entity: automation.simulation_de_presence_ete_fermeture_volets_ouest
+            - entity: automation.simulation_de_presence_sauf_ete_fermeture_volets_ouest
