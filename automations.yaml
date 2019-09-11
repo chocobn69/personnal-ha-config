@@ -1,44 +1,51 @@
-- alias: 'lumieres couloir auto on'
-  initial_state: 'on'
+# ##################################
+# Summary
+# 1. Automatic lights
+# 2. Open gates
+# 3. Presence simulation
+# 4. Alarm change
+# ##################################
+
+
+# 1. Automatic lights
+- alias: "lumieres couloir auto on"
+  initial_state: "off"
   trigger:
     - platform: state
       entity_id: binary_sensor.detecteur_couloir_sensor
-      from: 'off'
-      to: 'on'
+      from: "off"
+      to: "on"
   condition:
     condition: or
     conditions:
       # At least one of the following is required.
       - condition: time
-        after: '06:30:00'
-        before: '09:00:00'
+        after: "06:30:00"
+        before: "09:00:00"
       - condition: time
-        after: '17:00:00'
-        before: '20:15:00'
-      - condition: time
-        after: '21:15:00'
-        before: '05:10:00'
+        after: "17:00:00"
+        before: "05:10:00"
   action:
     - service: light.turn_on
       entity_id:
       - light.lumieres_couloir_level
       data_template:
         brightness: >
-          {% if now().strftime('%H')| int >= 19 %}
+          {% if now().strftime("%H")| int >= 19 %}
           8
-          {% elif now().strftime('%H')| int <= 8 %}
+          {% elif now().strftime("%H")| int <= 8 %}
           8
           {% else %}
           255
           {% endif %}
 
-- alias: 'extinction lumieres couloir si pas de mouvement'
-  initial_state: 'on'
+- alias: "extinction lumieres couloir si pas de mouvement"
+  initial_state: "off"
   trigger:
     - platform: state
       entity_id: binary_sensor.detecteur_couloir_sensor
-      from: 'on'
-      to: 'off'
+      from: "on"
+      to: "off"
       for:
         hours: 0
         minutes: 1
@@ -47,37 +54,240 @@
     - service: light.turn_off
       entity_id: light.lumieres_couloir_level
 
-# detection ouverture porte
-- alias: 'ouverture porte buanderie'
-  initial_state: 'on'
+# 2. Open gates
+- alias: "ouverture porte buanderie"
+  initial_state: "off"
   trigger:
       platform: state
       entity_id: sensor.philio_technology_corporation_pst02a_4_in_1_multisensor_access_control
-      to: '22'
+      to: "22"
   action:
     service: notify.mattermost
     data:
-      message: 'ouverture porte buanderie'
-      title: 'home assistant event'
-- alias: 'ouverture porte principale'
-  initial_state: 'on'
+      message: "ouverture porte buanderie"
+      title: "home assistant event"
+- alias: "ouverture porte principale"
+  initial_state: "off"
   trigger:
       platform: state
       entity_id: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_access_control
-      to: '22'
+      to: "22"
   action:
     service: notify.mattermost
     data:
-      message: 'ouverture porte principale'
-      title: 'home assistant event'
-- alias: 'ouverture porte garage'
-  initial_state: 'on'
+      message: "ouverture porte principale"
+      title: "home assistant event"
+- alias: "ouverture porte garage"
+  initial_state: "off"
   trigger:
       platform: state
       entity_id: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_access_control_2
-      to: '22'
+      to: "22"
   action:
     service: notify.mattermost
     data:
-      message: 'ouverture porte garage'
-      title: 'home assistant event'
+      message: "ouverture porte garage"
+      title: "home assistant event"
+      
+
+# 3. Presence simulation
+# 3.1. On veut que la lumiere du couloir s'allume aleatoirement 
+#   pendant 5/20 minutes aleatoirement
+#   toutes les 5/20 minutes
+#   - entre 18h et 23h30
+#   - entre 6h et 8h
+- alias: "simulation de presence lumieres couloir"
+  initial_state: "off"
+  trigger:
+    platform: time_pattern
+    minutes: "/5"
+  condition:
+   condition: and
+   conditions:
+     - condition: state
+       entity_id: "light.lumieres_couloir_level"
+       state: "off"
+     - condition: or 
+       conditions:
+       - condition: time
+         after: "06:00:00"
+         before: "08:30:00"
+       - condition: time
+         after: "17:30:00"
+         before: "23:30:00"
+  action:
+    - delay: "00:{{ ((range(5, 20) | random) | int)}}:00"
+    - service: light.turn_on
+      entity_id:
+      - light.lumieres_couloir_level
+      data_template:
+        brightness: 
+          255
+    - delay: "00:{{ ((range(5, 20) | random) | int)}}:00"
+    - service: light.turn_off
+      entity_id: light.lumieres_couloir_level
+
+# 3.2. On veut que les volets EST s'ouvrent a 6h32
+# Ouverture partielle : pendant 5 secondes
+# uniquement l'été
+- alias: "simulation de presence ete ouverture volets est"
+  initial_state: "off"
+  trigger:
+    platform: time
+    at: "06:32:00"
+  condition:
+      condition: template
+      value_template: "{{ is_state ('sensor.season', 'summer') }}"
+  action:
+    - service: cover.open_cover
+      entity_id: "cover.est"
+    - delay: "00:05:00"
+    - service: cover.close_cover
+      entity_id: "cover.est"
+
+# 3.2.1, On veut que les volets EST s'ouvrent a 6h32
+# tout sauf l'été
+- alias: "simulation de presence sauf ete ouverture volets est"
+  initial_state: "off"
+  trigger:
+    platform: time
+    at: "06:32:00"
+  condition:
+      condition: template
+      value_template: "{{ not is_state ('sensor.season', 'summer') }}"
+  action:
+    - service: cover.open_cover
+      entity_id: "cover.est"
+
+# 3.3. On veut que les volets EST se ferment a 10h02
+# uniquement l'été
+- alias: "simulation de presence ete fermeture volets est"
+  initial_state: "off"
+  trigger:
+    platform: time
+    at: "10:02:00"
+  condition:
+      condition: template
+      value_template: "{{ is_state ('sensor.season', 'summer') }}"
+  action:
+    - service: cover.close_cover
+      entity_id: "cover.est"
+
+# 3.4. On veut que les volets OUEST s'ouvrent completement a 7h12
+- alias: "simulation de presence ouverture volets ouest"
+  initial_state: "off"
+  trigger:
+    platform: time
+    at: "07:12:00"
+  action:
+    - service: cover.open_cover
+      entity_id: "cover.ouest"
+
+# 3.5 On veut que les volets OUEST se ferment a 11h45
+# uniquement l'été
+- alias: "simulation de presence ete fermeture volets ouest"
+  initial_state: "off"
+  trigger:
+    platform: time
+    at: "11:45:00"
+  condition:
+      condition: template
+      value_template: "{{ is_state ('sensor.season', 'summer') }}"
+  action:
+    - service: cover.close_cover
+      entity_id: "cover.ouest"
+
+# 3.6 On veut que les volets OUEST se ferment au couché du soleil
+# tout le temps sauf l'été
+- alias: "simulation de presence sauf ete fermeture volets ouest"
+  initial_state: "off"
+  trigger:
+      platform: sun
+      event: sunset
+      offset: '+00:00:00'
+  condition:
+      condition: template
+      value_template: "{{ not is_state ('sensor.season', 'summer') }}"
+  action:
+    - service: cover.close_cover
+      entity_id: "cover.ouest"
+
+# 3.6. On allume de la musique entre 8h et 23h
+# Pendant 30min / 1h
+# Toutes les 2 heures
+# - alias: "simulation de presence musique"
+#   initial_state: "off"
+#   trigger:
+#       platform: time_pattern
+#       hours: "/1"
+#   condition:
+#       condition: time
+#       after: "08:00:00"
+#       before: "23:30:00"
+#   action:
+#       - service: media_player.play_media
+#         entity_id: media_player.spotify
+#         media_content_id: "spotify:playlist:028abpXSlBkGmHx8FRrrpf"
+#         media_content_type: "playlist"
+#       - delay: "00:{{ ((range(30, 60) | random) | int)}}:00"
+
+# 4. Alarm triggers
+# 4.1. When alarm is enabled, when want to activate door notifications
+- alias: "activation alarme"
+  initial_state: "on"
+  trigger:
+      - platform: state
+        entity_id: alarm_control_panel.ha_alarm
+        to: 'armed_away'
+      - platform: state
+        entity_id: alarm_control_panel.ha_alarm
+        to: 'armed_home'
+  action:
+    - service: automation.turn_on
+      entity_id: automation.ouverture_porte_buanderie
+    - service: automation.turn_on
+      entity_id: automation.ouverture_porte_principale
+    - service: automation.turn_on
+      entity_id: automation.ouverture_porte_garage
+    - service: automation.turn_on
+      entity_id: automation.simulation_de_presence_lumieres_couloir
+    - service: automation.turn_on
+      entity_id: automation.simulation_de_presence_ete_ouverture_volets_est
+    - service: automation.turn_on
+      entity_id: automation.simulation_de_presence_sauf_ete_ouverture_volets_est
+    - service: automation.turn_on
+      entity_id: automation.simulation_de_presence_ete_fermeture_volets_est
+    - service: automation.turn_on
+      entity_id: automation.simulation_de_presence_ouverture_volets_ouest
+    - service: automation.turn_on
+      entity_id: automation.simulation_de_presence_ete_fermeture_volets_ouest
+    - service: automation.turn_on
+      entity_id: automation.simulation_de_presence_sauf_ete_fermeture_volets_ouest
+# 4.2. When alarm is disabled, when want to disactivate door notifications
+- alias: "desactivation alarme"
+  initial_state: "on"
+  trigger:
+      - platform: state
+        entity_id: alarm_control_panel.ha_alarm
+        to: 'disarmed'
+  action:
+    - service: automation.turn_off
+      entity_id: automation.ouverture_porte_buanderie
+    - service: automation.turn_off
+      entity_id: automation.ouverture_porte_principale
+    - service: automation.turn_off
+      entity_id: automation.ouverture_porte_garage
+    - service: automation.turn_off
+      entity_id: automation.simulation_de_presence_lumieres_couloir
+    - service: automation.turn_off
+      entity_id: automation.simulation_de_presence_ete_ouverture_volets_est
+    - service: automation.turn_off
+      entity_id: automation.simulation_de_presence_sauf_ete_ouverture_volets_est
+    - service: automation.turn_off
+      entity_id: automation.simulation_de_presence_ete_fermeture_volets_est
+    - service: automation.turn_off
+      entity_id: automation.simulation_de_presence_ouverture_volets_ouest
+    - service: automation.turn_off
+      entity_id: automation.simulation_de_presence_ete_fermeture_volets_ouest
+    - service: automation.turn_off
+      entity_id: automation.simulation_de_presence_sauf_ete_fermeture_volets_ouest
