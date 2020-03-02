@@ -71,14 +71,14 @@
     - cover.ouest
     - cover.est
  
-- platform: template
-  covers:
-    salon_template:
-      friendly_name: "Salon template"
-      set_cover_position:
-        service: script.cover_percent
-        data_template:
-          entity_id: cover.salon
-          position: "{{position}}"
-          total_time: 27
-      optimistic: true
+# - platform: template
+#   covers:
+#     salon_template:
+#       friendly_name: "Salon template"
+#       set_cover_position:
+#         service: script.cover_percent
+#         data_template:
+#           entity_id: cover.salon
+#           position: "{{position}}"
+#           total_time: 27
+#       optimistic: true

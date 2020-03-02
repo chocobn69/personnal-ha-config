@@ -18,3 +18,10 @@
     - tonbatt
 - platform: season
   type: astronomical
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /home/choco/datas
+    - type: disk_use_percent
+      arg: /
+    - type: memory_use_percent

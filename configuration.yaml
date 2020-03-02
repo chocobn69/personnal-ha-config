@@ -17,9 +17,11 @@ homeassistant:
     - type: trusted_networks
       trusted_networks: !secret trusted_networks
 
+default_config:
+
 # logging
 logger:
-  default: warning
+  default: info
 
 recorder:
   db_url: postgresql://hass:@localhost/hass
@@ -104,21 +106,6 @@ zwave:
   usb_path: /dev/ttyACM0
   network_key: !secret secret_network_key
 
-# history
-history_graph:
-  gr1:
-    name: Temp Salon (weekly)
-    entities:
-      - sensor.fibaro_system_fgsd002_smoke_sensor_temperature
-    hours_to_show: 168
-    refresh: 60
-  gr2:
-    name: Temp Salon (daily)
-    entities:
-      - sensor.fibaro_system_fgsd002_smoke_sensor_temperature
-    hours_to_show: 24
-    refresh: 60
-
 alarm_control_panel:
   - platform: manual
     code: !secret secret_alarm_code
@@ -127,11 +114,13 @@ alarm_control_panel:
 apcupsd:
 
 netatmo:
-  api_key: !secret secret_netatmo_api_key
-  secret_key: !secret secret_netatmo_secret_key
-  username: !secret secret_netatmo_username
-  password: !secret secret_netatmo_password
-  discovery: false
+    client_id: !secret secret_netatmo_client_id
+    client_secret: !secret secret_netatmo_client_secret
+    #  api_key: !secret secret_netatmo_api_key
+    #  secret_key: !secret secret_netatmo_secret_key
+    #  username: !secret secret_netatmo_username
+    #  password: !secret secret_netatmo_password
+    #  discovery: false
 
 lovelace:
     mode: yaml
@@ -141,17 +130,12 @@ camera:
 
 meteo_france:
   - city: !secret city
-    monitored_conditions:
-      - rain_chance
-      - freeze_chance
-      - thunder_chance
-      - snow_chance
-      - weather
-      - next_rain
-      - wind_speed
-      - temperature
-      - uv
-      - weather_alert
+
+mobile_app:
+
+linky:
+    - username: !secret secret_linky_username
+      password: !secret secret_linky_password
 
 # include
 #input_number: !include inputs.yaml

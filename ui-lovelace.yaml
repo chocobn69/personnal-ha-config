@@ -1,3 +1,6 @@
+resources:
+  - url: /local/monster-card.js
+    type: js
 title: Home Assistant
 views:
   - title: Maison
@@ -21,10 +24,17 @@ views:
           entity: sensor.netatmo_indoor_temperature
           name: Température Salon
           graph: line
+          hours_to_show: 48
         - type: sensor
           entity: sensor.netatmo_toit_temperature
           name: Température Toit
           graph: line
+          hours_to_show: 48
+        - type: sensor
+          entity: sensor.netatmo_indoor_noise
+          name: Bruit intérieur
+          graph: line
+          detail: 2
         - type: alarm-panel
           entity: alarm_control_panel.ha_alarm
 
@@ -91,16 +101,17 @@ views:
               name: Volets Ouest
             - entity: cover.tout
               name: Tous les volets
+
   - title: Lumieres
     panel: false
     cards:
-        - type: entities
-          title: Lumieres 
-          show_header_toggle: false
-          entities:
-            - type: light
-              entity: light.lumieres_couloir_level_2
-              name: Lumières couloir
+        - type: light
+          entity: light.lumieres_couloir_level
+          name: Lumières couloir
+        - type: light
+          entity: light.leds_salon
+          name: Leds Salon
+
   - title: Automatisations
     panel: false
     cards:
@@ -121,3 +132,52 @@ views:
             - entity: automation.simulation_de_presence_ouverture_volets_ouest
             - entity: automation.simulation_de_presence_ete_fermeture_volets_ouest
             - entity: automation.simulation_de_presence_sauf_ete_fermeture_volets_ouest
+
+  - title: Electricité
+    panel: false
+    cards:
+      - type: custom:monster-card
+        show_empty: true
+        card:
+          type: glance
+          title: Onduleur
+        filter:
+          include:
+            - entity_id: "sensor.*ups*"
+      - type: custom:monster-card
+        show_empty: true
+        card:
+          type: glance
+          title: Linky
+        filter:
+          include:
+            - entity_id: "sensor.linky*"
+      - type: custom:monster-card
+        show_empty: true
+        card:
+          type: glance
+          title: Batterie niveau faible
+        filter:
+          include:
+            - entity_id: "*battery_level*"
+              state: '<= 25'
+            - attributes:
+                battery: '<= 25'
+            - attributes:
+                battery_level: '<= 25'
+      - type: history-graph
+        title: 'Consommation électrique'
+        hours_to_show: 720
+        entities:
+            - entity: sensor.linky_yesterday
+              name: Consommation électrique
+  - title: Serveur
+    panel: false
+    cards:
+        - type: entities
+          title: Lumieres 
+          show_header_toggle: false
+          entities: 
+            - entity: sensor.memory_use_percent
+            - entity: sensor.disk_use_percent
+            - entity: sensor.disk_use_percent_home_choco_datas
