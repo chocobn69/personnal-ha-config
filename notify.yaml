@@ -1,14 +1,5 @@
-- platform: rest
-  name: mattermost
-  resource: !secret secret_mattermost_maison
-  method: POST_JSON 
-  message_param_name: text
-  data:
-    username: homeassistant
-- platform: rest
-  name: mattermost_tests
-  resource: !secret secret_mattermost_tests
-  method: POST_JSON 
-  message_param_name: text
-  data:
-    username: homeassistant
+- name: ALL_DEVICES
+  platform: group
+  services:
+    - service: mobile_app_nicolas_phone
+    - service: mobile_app_nexus_7

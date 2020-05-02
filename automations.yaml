@@ -21,7 +21,7 @@
     conditions:
       # At least one of the following is required.
       - condition: time
-        after: "06:30:00"
+        after: "07:00:00"
         before: "20:10:00"
       - condition: numeric_state
         entity_id: sensor.detecteur_couloir_luminance
@@ -63,7 +63,7 @@
       entity_id: sensor.philio_technology_corporation_pst02a_4_in_1_multisensor_access_control
       to: "22"
   action:
-    service: notify.mattermost
+    service: notify.ALL_DEVICES
     data:
       message: "ouverture porte buanderie"
       title: "home assistant event"
@@ -74,7 +74,7 @@
       entity_id: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_access_control
       to: "22"
   action:
-    service: notify.mattermost
+    service: notify.ALL_DEVICES
     data:
       message: "ouverture porte principale"
       title: "home assistant event"
@@ -85,7 +85,7 @@
       entity_id: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_access_control_2
       to: "22"
   action:
-    service: notify.mattermost
+    service: notify.ALL_DEVICES
     data:
       message: "ouverture porte garage"
       title: "home assistant event"
@@ -318,7 +318,7 @@
         from: "off"
         to: "on"
   action:
-    service: notify.mattermost
+    service: notify.ALL_DEVICES
     data:
       message: "DETECTION FEU / CHALEUR / FUMEES"
       title: "DETECTION FEU"

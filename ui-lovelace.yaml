@@ -1,6 +1,3 @@
-resources:
-  - url: /local/monster-card.js
-    type: js
 title: Home Assistant
 views:
   - title: Maison
@@ -18,20 +15,20 @@ views:
               name: Tout
         - type: picture-entity
           title: Camera
-          entity: camera.garage_exterieur
+          entity: camera.netatmo_garage_exterieur
           camera_view: live
         - type: sensor
-          entity: sensor.netatmo_indoor_temperature
+          entity: sensor.netatmo_meteo_indoor_temperature
           name: Température Salon
           graph: line
           hours_to_show: 48
         - type: sensor
-          entity: sensor.netatmo_toit_temperature
+          entity: sensor.netatmo_meteo_toit_temperature
           name: Température Toit
           graph: line
           hours_to_show: 48
         - type: sensor
-          entity: sensor.netatmo_indoor_noise
+          entity: sensor.netatmo_meteo_indoor_noise
           name: Bruit intérieur
           graph: line
           detail: 2
@@ -48,19 +45,31 @@ views:
           hours_to_show: 24
           refresh_interval: 10
           entities:
-            - entity: sensor.netatmo_indoor_temperature
+            - entity: sensor.netatmo_meteo_indoor_temperature
               name: Temperature intérieure
-            - entity: sensor.netatmo_toit_temperature
+            - entity: sensor.netatmo_meteo_toit_temperature
               name: Temperature extérieure
         - type: history-graph
           title: 'Temperatures sur une semaine'
           hours_to_show: 168
           refresh_interval: 10
           entities:
-            - entity: sensor.netatmo_indoor_temperature
+            - entity: sensor.netatmo_meteo_indoor_temperature
               name: Temperature intérieure
-            - entity: sensor.netatmo_toit_temperature
+            - entity: sensor.netatmo_meteo_toit_temperature
               name: Temperature extérieure
+        - type: history-graph
+          title: 'Pluiviométrie sur un jour'
+          hours_to_show: 24
+          refresh_interval: 10
+          entities:
+            - entity: sensor.netatmo_meteo_potager_rain
+        - type: history-graph
+          title: 'Pluiviométrie sur une semaine'
+          hours_to_show: 168
+          refresh_interval: 10
+          entities:
+            - entity: sensor.netatmo_meteo_potager_rain
 
   - title: Volets
     panel: false
@@ -136,41 +145,38 @@ views:
   - title: Electricité
     panel: false
     cards:
-      - type: custom:monster-card
-        show_empty: true
-        card:
-          type: glance
-          title: Onduleur
-        filter:
-          include:
-            - entity_id: "sensor.*ups*"
-      - type: custom:monster-card
-        show_empty: true
-        card:
-          type: glance
-          title: Linky
-        filter:
-          include:
-            - entity_id: "sensor.linky*"
-      - type: custom:monster-card
+      - type: entity-filter
         show_empty: true
         card:
           type: glance
           title: Batterie niveau faible
-        filter:
-          include:
-            - entity_id: "*battery_level*"
-              state: '<= 25'
-            - attributes:
-                battery: '<= 25'
-            - attributes:
-                battery_level: '<= 25'
+        state_filter:
+            - operator: "<="
+              value: 25
+        entities:
+            - entity: sensor.detecteur_couloir_battery_level
+            - entity: sensor.netatmo_meteo_potager_battery
+            - entity: sensor.netatmo_meteo_toit_battery_percent
+            - entity: sensor.battery_level_2
+            - entity: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_battery_level
+            - entity: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_battery_level_2
+            - entity: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_battery_level_3
+            - entity: sensor.battery_level
+            - entity: sensor.sm_t813_battery_level
+            - entity: sensor.smoke_sensor_salon_battery_level
+            - entity: sensor.ups_battery
       - type: history-graph
-        title: 'Consommation électrique'
+        title: 'Consommation électrique quotidienne'
         hours_to_show: 720
         entities:
             - entity: sensor.linky_yesterday
-              name: Consommation électrique
+              name: Consommation électrique quotidienne
+      - type: history-graph
+        title: 'Consommation électrique mensuelle'
+        hours_to_show: 8760
+        entities:
+            - entity: sensor.linky_current_month
+              name: Consommation électrique mensuelle
   - title: Serveur
     panel: false
     cards:
