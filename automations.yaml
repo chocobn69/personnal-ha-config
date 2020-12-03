@@ -322,3 +322,56 @@
     data:
       message: "DETECTION FEU / CHALEUR / FUMEES"
       title: "DETECTION FEU"
+
+
+# 6.1 On veut que les volets OUEST se ferment a 13h
+- alias: "fermture_auto_volets_ouest"
+  initial_state: "off"
+  trigger:
+    platform: time
+    at: "13:01:00"
+  action:
+    - service: cover.close_cover
+      entity_id: "cover.ouest"
+# 6.2 On veut que les volets EST s'ouvrent a 13h
+- alias: "ouverture_auto_volets_est"
+  initial_state: "off"
+  trigger:
+    platform: time
+    at: "13:00:00"
+  action:
+    - service: cover.open_cover
+      entity_id: "cover.est"
+# 6.3 On veut que les volets EST se ferment a 9h
+- alias: "fermeture_auto_volets_est"
+  initial_state: "off"
+  trigger:
+    platform: time
+    at: "09:00:00"
+  action:
+    - service: cover.close_cover
+      entity_id: "cover.est"
+
+## Guirlande Noel
+- alias: 'Allumage guirlande matin'
+  trigger:
+      platform: sun
+      event: sunrise
+      offset: '+00:00:00'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.shellyplug_s_168387
+    - delay: '04:00:00'
+    - service: switch.turn_off
+      entity_id: switch.shellyplug_s_168387
+- alias: 'Allumage guirlande soir'
+  trigger:
+      platform: sun
+      event: sunset
+      offset: '+00:00:00'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.shellyplug_s_168387
+    - delay: '04:00:00'
+    - service: switch.turn_off
+      entity_id: switch.shellyplug_s_168387

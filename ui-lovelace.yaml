@@ -1,4 +1,7 @@
 title: Home Assistant
+resources:
+    - url: /local/plugins/auto-entities.js?v=1
+      type: module
 views:
   - title: Maison
     panel: false
@@ -7,28 +10,32 @@ views:
           title: Volets roulant
           show_header_toggle: false
           entities:
+            - entity: cover.all
+              name: Tout
             - entity: cover.living
               name: Salon + Cuisine
             - entity: cover.chambres
               name: Chambres
-            - entity: cover.tout
-              name: Tout
+            - entity: cover.est
+              name: Est
+            - entity: cover.ouest
+              name: Ouest
         - type: picture-entity
           title: Camera
           entity: camera.netatmo_garage_exterieur
           camera_view: live
         - type: sensor
-          entity: sensor.netatmo_meteo_indoor_temperature
+          entity: sensor.netatmo_montagnat_indoor_temperature
           name: Température Salon
           graph: line
           hours_to_show: 48
         - type: sensor
-          entity: sensor.netatmo_meteo_toit_temperature
+          entity: sensor.netatmo_montagnat_indoor_toit_temperature
           name: Température Toit
           graph: line
           hours_to_show: 48
         - type: sensor
-          entity: sensor.netatmo_meteo_indoor_noise
+          entity: sensor.netatmo_montagnat_indoor_noise
           name: Bruit intérieur
           graph: line
           detail: 2
@@ -39,37 +46,37 @@ views:
     panel: false
     cards:
         - type: weather-forecast
-          entity: weather.montagnat
+          entity: weather.montagnat_2
         - type: history-graph
           title: 'Temperatures sur 24h'
           hours_to_show: 24
           refresh_interval: 10
           entities:
-            - entity: sensor.netatmo_meteo_indoor_temperature
+            - entity: sensor.netatmo_montagnat_indoor_temperature
               name: Temperature intérieure
-            - entity: sensor.netatmo_meteo_toit_temperature
+            - entity: sensor.netatmo_montagnat_toit_temperature
               name: Temperature extérieure
         - type: history-graph
           title: 'Temperatures sur une semaine'
           hours_to_show: 168
           refresh_interval: 10
           entities:
-            - entity: sensor.netatmo_meteo_indoor_temperature
+            - entity: sensor.netatmo_montagnat_indoor_temperature
               name: Temperature intérieure
-            - entity: sensor.netatmo_meteo_toit_temperature
+            - entity: sensor.netatmo_montagnat_toit_temperature
               name: Temperature extérieure
         - type: history-graph
           title: 'Pluiviométrie sur un jour'
           hours_to_show: 24
           refresh_interval: 10
           entities:
-            - entity: sensor.netatmo_meteo_potager_rain
+            - entity: sensor.netatmo_montagnat_potager_rain
         - type: history-graph
           title: 'Pluiviométrie sur une semaine'
           hours_to_show: 168
           refresh_interval: 10
           entities:
-            - entity: sensor.netatmo_meteo_potager_rain
+            - entity: sensor.netatmo_montagnat_potager_rain
 
   - title: Volets
     panel: false
@@ -108,7 +115,7 @@ views:
               name: Volets Est
             - entity: cover.ouest
               name: Volets Ouest
-            - entity: cover.tout
+            - entity: cover.all
               name: Tous les volets
 
   - title: Lumieres
@@ -120,6 +127,11 @@ views:
         - type: light
           entity: light.leds_salon
           name: Leds Salon
+        - type: button
+          entity: switch.shellyplug_s_168387
+          name: Guirlande de Noel extérieure
+          tap_action:
+              action: toggle
 
   - title: Automatisations
     panel: false
@@ -130,6 +142,13 @@ views:
           entities:
             - entity: automation.lumieres_couloir_auto_on
             - entity: automation.extinction_lumieres_couloir_si_pas_de_mouvement
+        - type: entities
+          title: Volets 
+          show_header_toggle: false
+          entities:
+            - entity: automation.ouverture_auto_volets_est
+            - entity: automation.fermeture_auto_volets_est
+            - entity: automation.fermture_auto_volets_ouest
         - type: entities
           title: Simulation de presence 
           show_header_toggle: false
@@ -142,41 +161,41 @@ views:
             - entity: automation.simulation_de_presence_ete_fermeture_volets_ouest
             - entity: automation.simulation_de_presence_sauf_ete_fermeture_volets_ouest
 
+        - type: entities
+          title: Divers
+          show_header_toggle: false
+          entities:
+              - entity: automation.allumage_guirlande_soir
+
   - title: Electricité
     panel: false
     cards:
-      - type: entity-filter
+      - type: custom:auto-entities
         show_empty: true
         card:
           type: glance
           title: Batterie niveau faible
-        state_filter:
-            - operator: "<="
-              value: 25
-        entities:
-            - entity: sensor.detecteur_couloir_battery_level
-            - entity: sensor.netatmo_meteo_potager_battery
-            - entity: sensor.netatmo_meteo_toit_battery_percent
-            - entity: sensor.battery_level_2
-            - entity: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_battery_level
-            - entity: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_battery_level_2
-            - entity: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_battery_level_3
-            - entity: sensor.battery_level
-            - entity: sensor.sm_t813_battery_level
-            - entity: sensor.smoke_sensor_salon_battery_level
-            - entity: sensor.ups_battery
-      - type: history-graph
-        title: 'Consommation électrique quotidienne'
-        hours_to_show: 720
-        entities:
-            - entity: sensor.linky_yesterday
-              name: Consommation électrique quotidienne
-      - type: history-graph
-        title: 'Consommation électrique mensuelle'
-        hours_to_show: 8760
-        entities:
-            - entity: sensor.linky_current_month
-              name: Consommation électrique mensuelle
+        filter:
+          include:
+            - attributes:
+                battery: "<= 50"
+            - entity_id: "*battery*"
+              sort:
+                method: state
+                numeric: true
+                ignore_case: true
+      # - type: history-graph
+      #   title: 'Consommation électrique quotidienne'
+      #   hours_to_show: 720
+      #   entities:
+      #       - entity: sensor.linky_yesterday
+      #         name: Consommation électrique quotidienne
+      # - type: history-graph
+      #   title: 'Consommation électrique mensuelle'
+      #   hours_to_show: 8760
+      #   entities:
+      #       - entity: sensor.linky_current_month
+      #         name: Consommation électrique mensuelle
   - title: Serveur
     panel: false
     cards:
