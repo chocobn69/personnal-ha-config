@@ -34,6 +34,17 @@
       command_close: curl -X POST http://192.168.1.17:8080/action/8/down
 
 - platform: group
+  name: all
+  entities:
+    - cover.enfant2
+    - cover.sdb
+    - cover.amis
+    - cover.cuisine
+    - cover.enfant1
+    - cover.parents
+    - cover.salon
+    - cover.atelier
+- platform: group
   name: living
   entities:
     - cover.cuisine
@@ -65,11 +76,6 @@
     - cover.parents
     - cover.salon
     - cover.atelier
-- platform: group
-  name: tout
-  entities:
-    - cover.ouest
-    - cover.est
  
 # - platform: template
 #   covers:

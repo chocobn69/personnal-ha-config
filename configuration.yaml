@@ -16,6 +16,8 @@ homeassistant:
     - type: homeassistant
     - type: trusted_networks
       trusted_networks: !secret trusted_networks
+  external_url: !secret http_home
+  internal_url: !secret http_home
 
 default_config:
 
@@ -27,17 +29,14 @@ recorder:
   db_url: postgresql://hass:@localhost/hass
   purge_keep_days: 365
 
-# Enables the frontend
-frontend:
-  javascript_version: latest
-
 # Enables configuration UI
 config:
+
 
 http:
   # Secrets are defined in the file secrets.yaml
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  base_url: !secret http_home
+  # server_port: !secret http_port
   ssl_certificate: !secret secret_ssl_certificate
   ssl_key: !secret secret_ssl_key
   #ip_ban_enabled: True
@@ -56,8 +55,8 @@ updater:
 
 # Discover some devices automatically
 discovery:
-  ignore:
-     - netgear_router
+  # ignore:
+  #    - netgear_router
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 # conversation:
@@ -112,15 +111,6 @@ alarm_control_panel:
 # apc ups battery backup
 apcupsd:
 
-netatmo:
-    client_id: !secret secret_netatmo_client_id
-    client_secret: !secret secret_netatmo_client_secret
-    #  api_key: !secret secret_netatmo_api_key
-    #  secret_key: !secret secret_netatmo_secret_key
-    #  username: !secret secret_netatmo_username
-    #  password: !secret secret_netatmo_password
-    #  discovery: false
-
 lovelace:
     mode: yaml
 
@@ -128,17 +118,21 @@ lovelace:
 #  - url: /local/monster-card.js
 #    type: js
 
-camera:
-  - platform: netatmo
+# camera:
+#   - platform: netatmo
+
+netatmo:
+  client_id: !secret secret_netatmo_client_id
+  client_secret: !secret secret_netatmo_client_secret
 
 meteo_france:
   - city: !secret city
 
 mobile_app:
 
-linky:
-    - username: !secret secret_linky_username
-      password: !secret secret_linky_password
+# linky:
+#     - username: !secret secret_linky_username
+#       password: !secret secret_linky_password
 
 # include
 #input_number: !include inputs.yaml
