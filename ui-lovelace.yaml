@@ -35,12 +35,38 @@ views:
           graph: line
           hours_to_show: 48
         - type: sensor
+          entity: sensor.philio_technology_corporation_pst02a_4_in_1_multisensor_temperature
+          name: Température Buanderie
+          graph: line
+          hours_to_show: 48
+        - type: sensor
+          entity: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_temperature
+          name: Température Entrée
+          graph: line
+          hours_to_show: 48
+        - type: sensor
+          entity: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_temperature_2
+          name: Température Atelier
+          graph: line
+          hours_to_show: 48
+        - type: sensor
           entity: sensor.netatmo_montagnat_indoor_noise
           name: Bruit intérieur
           graph: line
           detail: 2
         - type: alarm-panel
           entity: alarm_control_panel.ha_alarm
+        - type: button
+          entity: switch.shellyplug_s_168387
+          name: Chauffage semis
+          tap_action:
+              action: toggle
+        - type: button
+          entity: switch.shelly1_e868e7873f94
+          icon: 'hass:garage'
+          name: Porte garage
+          double_tape_action:
+              action: toggle
 
   - title: Meteo
     panel: false
@@ -127,11 +153,6 @@ views:
         - type: light
           entity: light.leds_salon
           name: Leds Salon
-        - type: button
-          entity: switch.shellyplug_s_168387
-          name: Guirlande de Noel extérieure
-          tap_action:
-              action: toggle
 
   - title: Automatisations
     panel: false
@@ -166,6 +187,12 @@ views:
           show_header_toggle: false
           entities:
               - entity: automation.allumage_guirlande_soir
+              - entity: automation.allumage_guirlande_matin
+              - entity: automation.ouverture_porte_buanderie
+              - entity: automation.ouverture_porte_garage
+              - entity: automation.ouverture_porte_principale
+              - entity: automation.allumage_chauffage_semis
+              - entity: automation.extinction_chauffage_semis
 
   - title: Electricité
     panel: false

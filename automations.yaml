@@ -352,26 +352,44 @@
     - service: cover.close_cover
       entity_id: "cover.est"
 
-## Guirlande Noel
+## 7. Guirlande Noel
 - alias: 'Allumage guirlande matin'
   trigger:
       platform: sun
       event: sunrise
-      offset: '+00:00:00'
+      offset: '-02:00:00'
   action:
     - service: switch.turn_on
       entity_id: switch.shellyplug_s_168387
-    - delay: '04:00:00'
+    - delay: '03:00:00'
     - service: switch.turn_off
       entity_id: switch.shellyplug_s_168387
 - alias: 'Allumage guirlande soir'
   trigger:
       platform: sun
       event: sunset
-      offset: '+00:00:00'
+      offset: '-00:30:00'
   action:
     - service: switch.turn_on
       entity_id: switch.shellyplug_s_168387
-    - delay: '04:00:00'
+    - delay: '05:00:00'
+    - service: switch.turn_off
+      entity_id: switch.shellyplug_s_168387
+
+## 8. Chauffage semis
+- alias: 'Allumage Chauffage semis'
+  trigger:
+      platform: numeric_state
+      entity_id: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_temperature_2
+      below: 16
+  action:
+    - service: switch.turn_on
+      entity_id: switch.shellyplug_s_168387
+- alias: 'Extinction Chauffage semis'
+  trigger:
+      platform: numeric_state
+      entity_id: sensor.philio_technology_corporation_pst02_a_4_in_1_multi_sensor_temperature_2
+      above: 16
+  action:
     - service: switch.turn_off
       entity_id: switch.shellyplug_s_168387

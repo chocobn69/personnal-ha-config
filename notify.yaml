@@ -2,4 +2,5 @@
   platform: group
   services:
     - service: mobile_app_nicolas_phone
-    - service: mobile_app_nexus_7
+    - service: mobile_app_telephone_pauline
+    - service: mobile_app_tablette
